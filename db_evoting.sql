@@ -1,0 +1,524 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 10, 2019 at 05:31 AM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `db_evoting`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_admin`
+--
+
+CREATE TABLE `tb_admin` (
+  `admin_id` int(11) NOT NULL,
+  `admin_nama` varchar(128) NOT NULL,
+  `admin_username` varchar(128) NOT NULL,
+  `admin_password` varchar(256) NOT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_admin`
+--
+
+INSERT INTO `tb_admin` (`admin_id`, `admin_nama`, `admin_username`, `admin_password`, `role_id`) VALUES
+(1, 'Rakhmat Khaidir', 'admin16', '$2y$10$riQO6ukjTjX59Bgfr//HGuS2oPB3hpOUmZOY45QTrzl0eMx04q2ga', 1),
+(2, 'Panitia', 'panitia', '$2y$10$8hKoJSy1bEgVnVNmoLYnNuBp.MyRboWfbs5sgWVHeB4IVgXrWr2Ha', 2),
+(3, 'Manager', 'manager', '$2y$10$P3LosxoDaTFwWpM0RPGwn.1qn3awZJ.z7e3N3J15mUOIqKRlh5jgO', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_calon_ketua`
+--
+
+CREATE TABLE `tb_calon_ketua` (
+  `calon_ketua_id` int(11) NOT NULL,
+  `calon_ketua_nama` varchar(128) NOT NULL,
+  `calon_ketua_nourut` int(16) NOT NULL,
+  `calon_ketua_foto` varchar(128) NOT NULL,
+  `calon_ketua_visimisi` text NOT NULL,
+  `calon_ketua_suara` int(128) NOT NULL,
+  `tema_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_calon_ketua`
+--
+
+INSERT INTO `tb_calon_ketua` (`calon_ketua_id`, `calon_ketua_nama`, `calon_ketua_nourut`, `calon_ketua_foto`, `calon_ketua_visimisi`, `calon_ketua_suara`, `tema_id`) VALUES
+(1, 'Sundar Pichai', 1, 'M-FEJMZ0_400x400.jpg', '', 5, 7),
+(2, 'Mark Zuckerberg', 2, 'Mark_Zuckerberg_F8_2018_Keynote_(cropped).jpg', '', 0, 7),
+(3, 'Timothy Donald Cook', 1, 'B0f8n_oe_400x400.jpg', '', 3, 8),
+(4, 'Satya Nadella', 2, 'satya-nadella-ceo-event-details-timeline.jpg', '', 2, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pemilih`
+--
+
+CREATE TABLE `tb_pemilih` (
+  `pemilih_id` int(11) NOT NULL,
+  `pemilih_jenis_pegawai` varchar(8) NOT NULL,
+  `pemilih_nomor` varchar(128) NOT NULL,
+  `pemilih_nama` varchar(128) NOT NULL,
+  `pemilih_gelar_depan` varchar(50) NOT NULL,
+  `pemilih_gelar_s3` varchar(50) NOT NULL,
+  `pemilih_gelar_belakang` varchar(50) NOT NULL,
+  `pemilih_jk` enum('L','P') NOT NULL,
+  `pemilih_nidn` text NOT NULL,
+  `pemilih_pend_akhir` varchar(20) NOT NULL,
+  `pemilih_golongan` varchar(20) NOT NULL,
+  `pemilih_jabatan` varchar(128) NOT NULL,
+  `pemilih_foto` varchar(128) NOT NULL,
+  `pemilih_prodi` varchar(128) NOT NULL,
+  `pemilih_verifikasi` enum('0','1') NOT NULL,
+  `pemilih_status` enum('0','1') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pemilih`
+--
+
+INSERT INTO `tb_pemilih` (`pemilih_id`, `pemilih_jenis_pegawai`, `pemilih_nomor`, `pemilih_nama`, `pemilih_gelar_depan`, `pemilih_gelar_s3`, `pemilih_gelar_belakang`, `pemilih_jk`, `pemilih_nidn`, `pemilih_pend_akhir`, `pemilih_golongan`, `pemilih_jabatan`, `pemilih_foto`, `pemilih_prodi`, `pemilih_verifikasi`, `pemilih_status`) VALUES
+(1, 'PNS', '196402161990101001', 'JUMADI', 'Prof. Dr.', 'Dr.', 'M.Pd.', 'L', '16026403', 'S-3', 'IV/d', 'Profesor', '196402161990101001_JUMADI.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(2, 'PNS', '195004141976031001', 'RUSTAM EFFENDI', 'Prof. Drs.', 'Dr.', 'M.Pd., Ph.D.', 'L', '14045004', 'S-3', 'IV/e', 'Profesor', '195004141976031001_RUSTAM_EFFENDI.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '1', '1'),
+(3, 'PNS', '197808062002121002', 'M. RAFIEK', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'L', '6087801', 'S-3', 'IV/c', 'Lektor Kepala', '197808062002121002_M__RAFIEK.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(4, 'PNS', '195912131985031003', 'ZULKIFLI', 'Dr.', 'Dr.', 'M.Pd.', 'L', '13125906', 'S-3', 'IV/b', 'Lektor Kepala', '195912131985031003_ZULKIFLI.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(5, 'PNS', '195505201982032001', 'ZAKIAH AGUS KUSASI', 'Dr.', 'Dr.', 'M.Pd.', 'P', '20055506', 'S-3', 'IV/a', 'Lektor Kepala', '195505201982032001_ZAKIAH_AGUS_KUSASI.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(6, 'PNS', '196502211990031007', 'MOH. FATAH YASIN', 'Dr.', 'Dr.', 'M.Pd.', 'L', '21026501', 'S-3', 'IV/a', 'Lektor Kepala', '196502211990031007_MOH__FATAH_YASIN.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(7, 'PNS', '195505061986032001', 'MARIA LUSIA ANITA SUMARYATI', 'Dr.', 'Dr.', 'M.Pd.', 'P', '6055503', 'S-3', 'III/d', 'Lektor', '195505061986032001_MARIA_LUSIA_ANITA_SUMARYATI.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(8, 'PNS', '196404281990031002', 'SABHAN', 'Dr.', 'Dr.', 'M.Pd.', 'L', '28046401', 'S-3', 'III/d', 'Lektor', '196404281990031002_SABHAN.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(9, 'PNS', '197303132005011004', 'SAINUL HERMAWAN', 'Dr.', 'Dr.', 'S.Pd., M.Hum.', 'L', '13037308', 'S-3', 'III/d', 'Lektor', '197303132005011004_SAINUL_HERMAWAN.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(10, 'PNS', '197906142005012001', 'RUSMA NOORTYANI', 'Dr.', 'Dr.', 'M.Pd.', 'P', '14067903', 'S-3', 'IV/a', 'Lektor Kepala', '197906142005012001_RUSMA_NOORTYANI.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(11, 'PNS', '198305082009122002', 'DWI WAHYU CANDRA DEWI', '-', '-', 'S.Pd., M.Pd.', 'P', '', 'S-2', 'III/c', 'Lektor', '', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(12, 'PNS', '198312042009122003', 'NOOR CAHAYA', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'P', '4128304', 'S-3', 'III/b', 'Asisten Ahli', '198312042009122003_NOOR_CAHAYA.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(13, 'PNS', '198311252014042002', 'DEWI ALFIANTI', '-', '-', 'S.Pd., M.Pd.', 'P', '', 'S-2', 'III/b', 'Asisten Ahli', '', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(14, 'PNS', '198905232015041004', 'AHSANI TAQWIEM', '-', '-', 'S.Pd., M.Pd.', 'L', '0023058905', 'S-2', 'III/b', 'Asisten Ahli', '198905232015041004_AHSANI_TAQWIEM.jpg', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(15, 'PNS', '195506061988031001', 'ABDUL MUTH\'IM', 'Prof. Dr.', 'Dr.', 'M.Pd.', 'L', '', 'S-3', 'IV/c', 'Profesor', '', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(16, 'PNS', '196103041989031003', 'FATCHUL MU\'IN', 'Prof. Dr.', 'Dr.', 'M.Hum.', 'L', '4036108', 'S-3', 'IV/c', 'Profesor', '196103041989031003_FATCHUL_MUIN.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(17, 'PNS', '196105081986032003', 'CAYANDRAWATI SUTIONO', 'Dr.', 'Dr.', 'M.A.', 'P', '8056107', 'S-3', 'IV/b', 'Lektor Kepala', '196105081986032003_CAYANDRAWATI_SUTIONO.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(18, 'PNS', '195909281990102001', 'NANIK MARIANI', 'Dr.', 'Dr.', 'M.Pd.', 'P', '', 'S-3', 'IV/a', 'Lektor Kepala', '', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(19, 'PNS', '196404241994032008', 'RINA LISTIA', 'Dr.', 'Dr.', 'M.Pd.', 'P', '24046404', 'S-3', 'IV/a', 'Lektor Kepala', '196404241994032008_RINA_LISTIA.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(20, 'PNS', '197308131999031001', 'SIRAJUDDIN KAMAL', '-', '-', 'S.S., M.Ed.', 'L', '13087302', 'S-2', 'III/d', 'Lektor', '197308131999031001_SIRAJUDDIN_KAMAL.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(21, 'PNS', '197806212001122002', 'ASMI RUSMANAYANTI', '-', '-', 'S.Pd., M.Sc.', 'P', '21067803', 'S-2', 'III/c', 'Lektor', '197806212001122002_ASMI_RUSMANAYANTI.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(22, 'PNS', '197710232001122003', 'NOOR EKA CHANDRA', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'P', '23107701', 'S-3', 'III/c', 'Lektor', '197710232001122003_NOOR_EKA_CHANDRA.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(23, 'PNS', '197608062001122002', 'JUMARIATI', 'Dr', 'Dr.', 'S.Pd., M.Pd.', 'P', '6087602', 'S-3', 'III/c', 'Lektor', '197608062001122002_JUMARIATI.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(24, 'PNS', '197902242009122001', 'NOR JANNAH', '-', '-', 'S.Pd., M.A.', 'P', '', 'S-2', 'III/b', 'Asisten Ahli', '', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(25, 'PNS', '198007162010121003', 'MOH. YAMIN', '-', '-', 'M.Pd.', 'L', '716078005', 'S-2', 'III/d', 'Lektor', '198007162010121003_MOH__YAMIN.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(26, 'PNS', '198202202005012002', 'EMMA ROSANA FEBRIYANTI', '-', '-', 'S.Pd., M.Pd.', 'P', '20028201', 'S-2', 'III/b', 'Asisten Ahli', '198202202005012002_EMMA_ROSANA_FEBRIYANTI.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(27, 'PNS', '197902132005012002', 'ELVINA ARAPAH', '-', '-', 'S.Pd., M.Pd.', 'P', '13027905', 'S-2', 'III/b', 'Asisten Ahli', '197902132005012002_ELVINA_ARAPAH.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(28, 'PNS', '197212172000031001', 'ANDRI RAHARDIAN', '-', '-', 'S.S.', 'L', '17127201', 'S-1', 'III/a', 'Asisten Ahli', '197212172000031001_ANDRI_RAHARDIAN.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(29, 'PNS', '197411192000122001', 'NOVITA TRIANA', '-', '-', 'S.Pd., M.A.', 'P', '19117401', 'S-2', 'III/b', 'Asisten Ahli', '197411192000122001_NOVITA_TRIANA.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(30, 'PNS', '198812272014042001', 'DINI NOOR ARINI', '-', '-', 'S.Pd., M.Pd.', 'P', '1127128801', 'S-2', 'III/b', 'Asisten Ahli', '198812272014042001_DINI_NOOR_ARINI.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(31, 'PNS', '198703062015041003', 'NASRULLAH', '-', '-', 'S.Pd., M.Pd.B.I.', 'L', '26057907', 'S-2', 'III/b', 'Dosen', '198703062015041003_NASRULLAH.jpg', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(32, 'CPNS', '199208202018032001', 'RAISA FADILLA', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(33, 'PNS', '198007022005012004', 'NINA PERMATA SARI', 'Dr.', 'Dr.', 'S.Psi., M.Pd.', 'P', '2078005', 'S-3', 'III/c', 'Lektor', '198007022005012004_NINA_PERMATA_SARI.jpg', 'BIMBINGAN KONSELING', '0', '0'),
+(34, 'PNS', '197502142005012001', 'RIRIANTI RACHMAYANIE JAMAIN', 'Dr.', 'Dr.', 'S.Psi., M.Pd.', 'P', '14027507', 'S-3', 'III/c', 'Lektor', '197502142005012001_RIRIANTI_RACHMAYANIE_JAMAIN.jpg', 'BIMBINGAN KONSELING', '0', '0'),
+(35, 'PNS', '197604272008011011', 'ALI RACHMAN', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'L', '27047606', 'S-3', 'III/c', 'Lektor Kepala', '197604272008011011_ALI_RACHMAN.jpg', 'BIMBINGAN KONSELING', '0', '0'),
+(36, 'PNS', '198503012008012008', 'SULISTIYANA', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'P', '1038501', 'S-3', 'III/c', 'Lektor', '198503012008012008_SULISTIYANA.jpg', 'BIMBINGAN KONSELING', '0', '0'),
+(37, 'CPNS', '199208062018032001', 'EKLYS CHESEDA MAKARIA', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'BIMBINGAN KONSELING', '0', '0'),
+(38, 'PNS', '196511171990031005', 'AMINUDDIN PRAHATAMA PUTRA', 'Dr.', 'Dr.', 'M.Pd.', 'L', '17116508', 'S-3', 'IV/c', 'Lektor Kepala', '196511171990031005_AMINUDDIN_PRAHATAMA_PUTRA.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(39, 'PNS', '195707261985031001', 'HARDIANSYAH', 'Drs.', '-', 'M.Si.', 'L', '26075702', 'S-2', 'IV/c', 'Lektor Kepala', '195707261985031001_HARDIANSYAH.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(40, 'PNS', '195909091985032002', 'NOORHIDAYATI', 'Dra.', '-', 'M.Si.', 'P', '9095920', 'S-2', 'IV/c', 'Lektor Kepala', '195909091985032002_NOORHIDAYATI.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(41, 'PNS', '196601101992031003', 'KASPUL', 'Drs.', '-', 'M.Si.', 'L', '10016606', 'S-2', 'IV/b', 'Lektor Kepala', '196601101992031003_KASPUL.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(42, 'PNS', '195606031980031002', 'MUHAMMAD ZAINI', 'Dr.', 'Dr.', 'M.Pd.', 'L', '3065605', 'S-3', 'IV/a', 'Lektor Kepala', '195606031980031002_MUHAMMAD_ZAINI.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(43, 'PNS', '196009091987032001', 'SRI AMINTARTI', 'Dra.', '-', 'M.Si.', 'P', '9096004', 'S-2', 'IV/a', 'Lektor Kepala', '196009091987032001_SRI_AMINTARTI.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(44, 'PNS', '196205281991031004', 'BUNDA HALANG', 'Drs.', '-', 'M.T.', 'L', '28056203', 'S-2', 'IV/a', 'Lektor Kepala', '196205281991031004_BUNDA_HALANG.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(45, 'PNS', '196611061992032002', 'AULIA AJIZAH', 'Dra.', '-', 'M.Kes.', 'P', '6116605', 'S-2', 'IV/a', 'Lektor Kepala', '196611061992032002_AULIA_AJIZAH.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(46, 'PNS', '196610201993031004', 'DHARMONO', 'Dr.', 'Dr.', 'M.Si.', 'L', '20106603', 'S-3', 'IV/a', 'Lektor Kepala', '196610201993031004_DHARMONO.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(47, 'PNS', '197505022005011005', 'MAHRUDIN', '-', '-', 'S.Pd., M.Pd.', 'L', '2057505', 'S-2', 'III/b', 'Lektor', '197505022005011005_MAHRUDIN.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(48, 'PNS', '198810042014041001', 'M. ARSYAD', '-', '-', 'S.Pd., M.Pd.', 'L', '1104108801', 'S-2', 'III/b', 'Asisten Ahli', '198810042014041001_M__ARSYAD.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(49, 'PNS', '196306071989031004', 'MULYADI', 'Drs.', '-', 'M.SI', 'L', '', 'S-2', 'IV/a', 'Lektor Kepala', '', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(50, 'PNS', '198605082015041002', 'MAULANA KHALID', '-', '-', 'S.Si., M.Sc.', 'L', '0008058602', 'S-2', 'III/b', 'Dosen', '198605082015041002_MAULANA_KHALID.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(51, 'PNS', '195702061981031001', 'SURATNO', 'Prof. Dr.', 'Dr.', 'M.Pd.', 'L', '6025707', 'S-3', 'IV/e', 'Profesor', '195702061981031001_SURATNO.jpg', 'PENDIDIKAN EKONOMI', '0', '0'),
+(52, 'PNS', '196212131988111001', 'DWI ATMONO', 'Prof. Dr.', 'Dr.', 'M.Pd., M.Si.', 'L', '13126203', 'S-3', 'IV/d', 'Profesor', '196212131988111001_DWI_ATMONO.jpg', 'PENDIDIKAN EKONOMI', '0', '0'),
+(53, 'PNS', '195105111981031002', 'RIZALI HADI', 'Prof. Dr.', 'Dr.', 'M.M.', 'L', '11055104', 'S-3', 'IV/d', 'Profesor', '195105111981031002_RIZALI_HADI.jpg', 'PENDIDIKAN EKONOMI', '0', '0'),
+(54, 'PNS', '195411181980122001', 'SRI SETITI', 'Dr.', 'Dr.', 'M.M.', 'P', '18115401', 'S-3', 'IV/b', 'Lektor Kepala', '195411181980122001_SRI_SETITI.jpg', 'PENDIDIKAN EKONOMI', '0', '0'),
+(55, 'PNS', '195907101985031005', 'SUPRIYANTO', 'Dr. Drs.', 'Dr.', 'M.Pd.', 'L', '10075907', 'S-3', 'IV/b', 'Lektor Kepala', '195907101985031005_SUPRIYANTO.jpg', 'PENDIDIKAN EKONOMI', '0', '0'),
+(56, 'PNS', '197903212005012002', 'MAHMUDAH HASANAH', '-', '-', 'S.Pd., M.Pd.', 'P', '21037903', 'S-2', 'III/c', 'Lektor', '197903212005012002_MAHMUDAH_HASANAH.jpg', 'PENDIDIKAN IPS', '0', '0'),
+(57, 'PNS', '198204132005011001', 'MUHAMMAD RAHMATTULLAH', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'L', '', 'S-3', 'III/c', 'Lektor', '', 'PENDIDIKAN EKONOMI', '0', '0'),
+(58, 'PNS', '198203212006041001', 'BASERAN NOR', '-', '-', 'S.Pd., M.Pd.', 'L', '21038202', 'S-2', 'III/c', 'Lektor', '198203212006041001_BASERAN_NOR.jpg', 'PENDIDIKAN EKONOMI', '0', '0'),
+(59, 'PNS', '198508112008122003', 'MELLY AGUSTINA PERMATASARI', '-', '-', 'S.Pd., M.Pd.', 'P', '11088501', 'S-2', 'III/b', 'Lektor', '198508112008122003_MELLY_AGUSTINA_PERMATASARI.jpg', 'PENDIDIKAN IPS', '0', '0'),
+(60, 'PNS', '198211242008121004', 'MONRY FRAICK NICKY GILLIAN RATUMBUY SANG', '-', '-', 'S.Pd., M.Pd.', 'L', '24118201', 'S-2', 'III/b', 'Lektor', '198211242008121004_MONRY_FRAICK_NICKY_GILLIAN_RATUMBUY_SANG.jpg', 'PENDIDIKAN EKONOMI', '0', '0'),
+(61, 'PNS', '198211162008122001', 'YUNI NOFITASARI', '-', '-', 'S.Pd.', 'P', '', 'S-1', 'III/a', 'Dosen', '', 'PENDIDIKAN EKONOMI', '0', '0'),
+(62, 'PNS', '198902022015041003', 'MAULANA RIZKY', '-', '-', 'M.Acc., Ak.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN EKONOMI', '0', '0'),
+(63, 'PNS', '196210011989031003', 'MUHAMMAD ARIFUDDIN', 'Drs.', '-', 'M.Pd.', 'L', '', 'S-2', 'III/d', 'Lektor', '', 'PENDIDIKAN FISIKA', '0', '0'),
+(64, 'PNS', '197804162003122002', 'EKO SUSILOWATI', 'Dr.', 'Dr.', 'S.Pd., M.Si.', 'P', '16047802', 'S-3', 'III/d', 'Lektor', '197804162003122002_EKO_SUSILOWATI.jpg', 'PENDIDIKAN FISIKA', '0', '0'),
+(65, 'PNS', '196612311993031019', 'ZAINUDDIN', 'Drs.', '-', 'M.Pd.', 'L', '', 'S-2', 'III/c', 'Lektor', '', 'PENDIDIKAN FISIKA', '0', '0'),
+(66, 'PNS', '198110012003122001', 'MUSTIKA WATI', 'Dr.', 'Dr.', 'S.Pd., M.Sc.', 'P', '', 'S-3', 'III/c', 'Lektor', '', 'PENDIDIKAN FISIKA', '0', '0'),
+(67, 'PNS', '198207022010121003', 'SUYIDNO', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'L', '2078202', 'S-3', 'III/b', 'Lektor', '198207022010121003_SUYIDNO_.jpg', 'PENDIDIKAN FISIKA', '0', '0'),
+(68, 'PNS', '197911072005011004', 'SYUBHAN AN\'NUR', '-', '-', 'S.Pd.I., M.Pd.', 'L', '', 'S-2', 'III/c', 'Lektor', '', 'PENDIDIKAN IPA', '0', '0'),
+(69, 'PNS', '198503312012121002', 'ANDI ICHSAN MAHARDIKA', 'Dr', 'Dr.', 'S.Pd., M.Pd.', 'L', '31038503', 'S-3', 'III/b', 'Asisten Ahli', '198503312012121002_ANDI_ICHSAN_MAHARDIKA.jpg', 'PENDIDIKAN ILMU KOMPUTER', '0', '0'),
+(70, 'PNS', '197907122003122001', 'SARAH MIRIAM', '-', '-', 'S.Pd., M.Sc., M.Pd.', 'P', '12077903', 'S-2', 'III/b', 'Lektor', '197907122003122001_SARAH_MIRIAM.jpg', 'PENDIDIKAN FISIKA', '0', '0'),
+(71, 'PNS', '198004192004011001', 'MASTUANG', '-', '-', 'S.Pd., M.Pd.', 'L', '19048005', 'S-2', 'III/b', 'Lektor', '198004192004011001_MASTUANG.jpg', 'PENDIDIKAN FISIKA', '0', '0'),
+(72, 'PNS', '198504142008122001', 'SRI HARTINI', '-', '-', 'S.Pd.Si., M.Sc.', 'P', '14048501', 'S-2', 'III/c', 'Lektor', '198504142008122001_SRI_HARTINI.jpg', 'PENDIDIKAN FISIKA', '0', '0'),
+(73, 'PNS', '198212062008121001', 'ABDUL SALAM M', '-', '-', 'S.Pd., M.Pd.', 'L', '6128202', 'S-2', 'III/c', 'Lektor', '198212062008121001_ABDUL_SALAM_M.jpg', 'PENDIDIKAN FISIKA', '0', '0'),
+(74, 'PNS', '198808162015042003', 'MISBAH', '-', '-', 'S.Pd., M.Pd.', 'P', '1116088801', 'S-2', 'III/b', 'Asisten Ahli', '198808162015042003_MISBAH.jpg', 'PENDIDIKAN FISIKA', '0', '0'),
+(75, 'PNS', '196710032002121001', 'SIDHARTA ADYATMA', 'Dr.,Drs.', 'Dr.', 'M.Si.', 'L', '', 'S-3', 'III/d', 'Lektor Kepala', '', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(76, 'PNS', '198012112003122002', 'ELLYN NORMELANI', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'P', '11128001', 'S-3', 'III/d', 'Lektor Kepala', '198012112003122002_ELLYN_NORMELANI.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(77, 'PNS', '198202132003122001', 'KARUNIA PUJI HASTUTI', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'P', '13028202', 'S-3', 'III/d', 'Lektor', '198202132003122001_KARUNIA_PUJI_HASTUTI.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(78, 'PNS', '197907012003121009', 'NASRUDDIN', 'Dr.', 'Dr.', 'S.Pd.,M.Sc', 'L', '1077904', 'S-3', 'III/c', 'Lektor', '197907012003121009_NASRUDDIN.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(79, 'PNS', '198109272005012002', 'PARIDA ANGRIANI', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'P', '27098103', 'S-3', 'III/c', 'Lektor', '198109272005012002_PARIDA_ANGRIANI.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(80, 'PNS', '198112202006042002', 'DEASY ARISANTY', 'Dr.', 'Dr.', 'S.Si., M.Sc.', 'P', '11128001', 'S-3', 'III/d', 'Lektor Kepala', '198112202006042002_DEASY_ARISANTY.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(81, 'PNS', '198105042006042001', 'ROSALINA KUMALAWATI', 'Dr.', 'Dr.', 'S.Si., M.Si.', 'P', '4058104', 'S-3', 'III/c', 'Lektor', '198105042006042001_ROSALINA_KUMALAWATI.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(82, 'PNS', '198208092010121003', 'ARIF RAHMAN NUGROHO', '-', '-', 'S.Pd., M.Sc.', 'L', '9088204', 'S-2', 'III/b', 'Asisten Ahli', '198208092010121003_ARIF_RAHMAN_NUGROHO.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(83, 'PNS', '198306032008012009', 'NORMA YUNI KARTIKA', '-', '-', 'S.Pd., M.Sc.', 'P', '3068302', 'S-2', 'III/b', 'Lektor', '198306032008012009_NORMA_YUNI_KARTIKA.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(84, 'PNS', '197911272008012009', 'EVA ALVIAWATI', '-', '-', 'S.Pd., M.Sc.', 'P', '27117903', 'S-2', 'III/b', 'Asisten Ahli', '197911272008012009_EVA_ALVIAWATI.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(85, 'PNS', '198804192014042002', 'NEVY FARISTA ARISTIN', '-', '-', 'S.Pd., M.Sc.', 'P', '19048803', 'S-2', 'III/b', 'Asisten Ahli', '198804192014042002_NEVY_FARISTA_ARISTIN.jpg', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(86, 'PNS', '199007292018031001', 'FAISAL ARIF SETIAWAN', '-', '-', 'M.Pd', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(87, 'PNS', '195506261980031005', 'MAHLAN ASMAR', 'Drs.', '-', 'M.Pd.', 'L', '26065513', 'S-2', 'IV/a', 'Lektor Kepala', '195506261980031005_MAHLAN_ASMAR.jpg', 'PENDIDIKAN GURU PAUD', '0', '0'),
+(88, 'PNS', '195808131984032002', 'IKE HANANIK', 'Dra.', '-', 'M.Pd.', 'P', '13085811', 'S-2', 'III/d', 'Lektor', '195808131984032002_IKE_HANANIK.jpg', 'PENDIDIKAN GURU PAUD', '0', '0'),
+(89, 'PNS', '195911261987102001', 'SUSILAWATY', 'Dr.', 'Dr.', 'M.Pd.', 'P', '26115908', 'S-3', 'III/c', 'Lektor', '195911261987102001_SUSILAWATY.jpg', 'PENDIDIKAN GURU PAUD', '0', '0'),
+(90, 'PNS', '198110022010121002', 'MOHAMMAD DANI WAHYUDI', '-', '-', 'S.Pd.I., M.Pd.', 'L', '2108105', 'S-2', 'III/b', 'Lektor', '198110022010121002_MOHAMMAD_DANI_WAHYUDI.jpg', 'PENDIDIKAN GURU PAUD', '0', '0'),
+(91, 'PNS', '197611062006042002', 'NOVITAWATI', 'Dr.', 'Dr.', 'S.Psi., M.Pd.', 'P', '19117408', 'S-3', 'III/c', 'Lektor', '197611062006042002_NOVITAWATI.jpg', 'PENDIDIKAN GURU PAUD', '0', '0'),
+(92, 'PNS', '199009262018032001', 'CHRESTY ANGGREANI', '-', '-', 'M.Pd', 'P', '0', 'S-2', 'III/b', 'Dosen', '199009262018032001_CHRESTY_ANGGREANI.jpg', 'PENDIDIKAN GURU PAUD', '0', '0'),
+(93, 'PNS', '195912251986031001', 'AHMAD SURIANSYAH', 'Prof. Drs.', 'Dr.', 'M.Pd., Ph.D.', 'L', '', 'S-3', 'IV/c', 'Profesor', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(94, 'PNS', '195702021977031002', 'MUHAMMAD FAUZI', '-', '-', 'S.H., M.Sc.', 'L', '', 'S-2', 'IV/b', 'Asisten Ahli', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(95, 'PNS', '195912151987031017', 'METROYADI', 'Dr.', 'Dr.', 'S.H., M.Pd.', 'L', '15125906', 'S-3', 'IV/b', 'Lektor', '195912151987031017_METROYADI.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(96, 'PNS', '196001101986032001', 'ASLAMIAH', 'Prof. Dr.', 'Dr.', 'M.M.Pd., Ph.D.', 'P', '', 'S-3', 'IV/c', 'Profesor', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(97, 'PNS', '195608051983031007', 'SUTIYARSO', 'Drs.', '-', 'M.Pd.', 'L', '', 'S-2', 'IV/a', 'Lektor Kepala', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(98, 'PNS', '196006061987102001', 'DARMIYATI', 'Dr.', 'Dr.', 'M.Pd.', 'P', '6066017', 'S-3', 'IV/a', 'Lektor Kepala', '196006061987102001_DARMIYATI.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(99, 'PNS', '195809031988031002', 'RAMADI', 'Drs.', '-', 'M.Pd.', 'L', '', 'S-2', 'IV/a', 'Lektor Kepala', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(100, 'PNS', '195908081985111001', 'RADIANSYAH', 'Drs.', '-', 'M.Pd.', 'L', '', 'S-2', 'IV/a', 'Lektor Kepala', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(101, 'PNS', '195812261987031001', 'KHAIRIL ANWAR', 'Drs.', '-', 'M.Pd.', 'L', '26125803', 'S-2', 'III/d', 'Lektor', '195812261987031001_KHAIRIL_ANWAR.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(102, 'PNS', '196105101988031002', 'MAHMUDDIN', 'Drs.', '-', 'M.Pd.', 'L', '', 'S-2', 'III/d', 'Lektor', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(103, 'PNS', '195803281986031003', 'M. SALEH', 'Dr.', 'Dr.', 'M.Pd.', 'L', '28035805', 'S-3', 'IV/a', 'Lektor Kepala', '195803281986031003_M__SALEH.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(104, 'PNS', '196107081988031001', 'SUNARNO', 'Drs.', '-', 'M.Pd.', 'L', '8076105', 'S-2', 'III/c', 'Lektor', '196107081988031001_SUNARNO.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(105, 'PNS', '195908101980031019', 'NGADIMUN', 'Dr.', 'Dr.', 'MM', 'L', '0010085910', 'S-3', 'IV/d', 'Lektor', '195908101980031019_NGADIMUN.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(106, 'PNS', '197212152002122001', 'NOORHAFIZAH', 'Dr.', 'Dr.', 'ST.,M.Pd.', 'P', '0015127209', 'S-3', 'III/d', 'Lektor', '197212152002122001_NOORHAFIZAH.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(107, 'PNS', '196408171985031006', 'AMBERANSYAH', '-', '-', 'S.Pd.,M.Pd.', 'L', '0017086411', 'S-2', 'III/d', 'Asisten Ahli', '196408171985031006_AMBERANSYAH.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(108, 'PNS', '196904171997031006', 'SUHAIMI', 'Dr.', 'Dr.', 'M.Pd.', 'L', '0', 'S-3', 'IV/b', 'Lektor', '196904171997031006_SUHAIMI.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(109, 'PNS', '198911262018032001', 'TIKA PUSPITA WIDYA RINI', '-', '-', 'M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(110, 'PNS', '199212132018032001', 'DESSY DWITALIA SARI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(111, 'PNS', '199312092018032001', 'RIZKY AMELIA', '-', '-', 'S.Pd.,M.Pd.', 'P', '0', 'S-2', 'III/b', 'Dosen', '199312092018032001_RIZKY_AMELIA.jpg', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0'),
+(112, 'PNS', '198509072012122001', 'RATNA YULINDA', '-', '-', 'S.Pd., M.Pd.', 'P', '0007098501', 'S-2', 'III/b', 'Asisten Ahli', '198509072012122001_RATNA_YULINDA.jpg', 'PENDIDIKAN IPA', '0', '0'),
+(113, 'PNS', '198909072018032001', 'MUTIANI', '-', '-', 'M.Pd', 'P', '0', 'S-2', 'III/b', 'Dosen', '198909072018032001_MUTIANI.jpg', 'PENDIDIKAN IPS', '0', '0'),
+(114, 'PNS', '196206251986031003', 'TRI IRIANTO', 'Dr.', 'Dr.', 'M.Kes.', 'L', '25066209', 'S-3', 'IV/b', 'Lektor Kepala', '196206251986031003_tri_rianto.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(115, 'PNS', '196409201989031004', 'SUNARNO BASUKI', 'Dr.', 'Dr.', 'Drs.,M.Kes.', 'L', '20096402', 'S-3', 'IV/c', 'Lektor Kepala', '196409201989031004_SUNARNO_BASUKI.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(116, 'PNS', '196305151992032001', 'HERITA WARNI', 'Dr.', 'Dr.', 'M.Pd.', 'P', '15056302', 'S-3', 'IV/a', 'Lektor Kepala', '196305151992032001_HERITA_WARNI.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(117, 'PNS', '196105031987031001', 'SYAMSUL ARIFIN', 'Dr.', 'Dr.', 'M.Pd.', 'L', '3056107', 'S-3', 'IV/a', 'Lektor Kepala', '196105031987031001_SYAMSUL_ARIFIN.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(118, 'PNS', '195902271988111001', 'ATHAR', 'Drs.', '-', 'M.Kes.', 'L', '', 'S-2', 'III/d', 'Lektor', '', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(119, 'PNS', '195907161987031001', 'SAID ABDILLAH', 'Drs.', '-', 'M.Pd.', 'L', '16075910', 'S-2', 'III/d', 'Lektor', '195907161987031001_SAID_ABDILLAH.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(120, 'PNS', '195502181983031002', 'M. KUSAINI', 'Drs.', '-', 'M.Pd.', 'L', '18025503', 'S-2', 'III/d', 'Lektor', '195502181983031002_M__KUSAINI.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(121, 'PNS', '195803011988031004', 'SOFYAN', 'Drs.', '-', 'M.Pd.', 'L', '1035812', 'S-2', 'III/d', 'Lektor', '195803011988031004_Sofyan.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(122, 'PNS', '196006161987031004', 'MA\'RUFUL KAHRI', 'Dr.', 'Dr.', 'M.Pd.', 'L', '16046015', 'S-3', 'III/d', 'Lektor', '196006161987031004_MARUFUL_KAHRI.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(123, 'PNS', '196309251988031002', 'PERDINANTO', 'Drs.', '-', 'M.Pd.', 'L', '25096302', 'S-2', 'III/d', 'Lektor', '196309251988031002_PERDINANTO.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(124, 'PNS', '196005071988031004', 'ABD. HAMID', 'Drs.', '-', 'M.Pd.', 'L', '7056015', 'S-2', 'III/d', 'Lektor', '196005071988031004_ABD__HAMID.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(125, 'PNS', '196107271988121002', 'MUHAMMAD MULHIM', 'Drs.', '-', 'M.Pd.', 'L', '27076106', 'S-2', 'III/c', 'Lektor', '196107271988121002_MUHAMMAD_MULHIM.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(126, 'PNS', '195807161988031001', 'SARMIDI', 'Drs.', '-', 'M.Kes.', 'L', '16075804', 'S-2', 'III/c', 'Lektor', '195807161988031001_SARMIDI.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(127, 'PNS', '196107301988031001', 'NURDIANSYAH', 'Dr.', 'Dr.', 'M.Pd.', 'L', '30076104', 'S-3', 'III/c', 'Lektor', '196107301988031001_NURDIANSYAH.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(128, 'PNS', '197807312002121001', 'RAHMADI', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'L', '31077801', 'S-3', 'III/d', 'Lektor', '197807312002121001_RAHMADI.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(129, 'PNS', '197602182005011005', 'ARIE RAKHMAN', '-', '-', 'S.Pd., M.Pd.', 'L', '18027602', 'S-2', 'III/b', 'Asisten Ahli', '197602182005011005_ARIE_RAKHMAN.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(130, 'PNS', '198012252010121002', 'MASHUD', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'L', '25128002', 'S-3', 'III/c', 'Lektor', '198012252010121002_MASHUD.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(131, 'PNS', '198206232010121005', 'EDWIN WAHYU DIRGANTORO', '-', '-', 'S.Or., M.Pd.', 'L', '23068205', 'S-2', 'III/b', 'Asisten Ahli', '198206232010121005_EDWIN_WAHYU_DIRGANTORO.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(132, 'PNS', '198305272006042001', 'EKA PURNAMA INDAH', '-', '-', 'S.Pd., M.Pd.', 'P', '27058302', 'S-2', 'III/b', 'Asisten Ahli', '198305272006042001_EKA_PURNAMA_INDAH.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(133, 'PNS', '198002222005012007', 'MITA ERLIANA', '-', '-', 'S.Pd., M.Or.', 'P', '22028003', 'S-2', 'III/b', 'Lektor', '198002222005012007_MITA_ERLIANA.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(134, 'PNS', '196808281993031001', 'RUSMANSYAH', 'Dr', 'Dr.', 'M.Pd.', 'L', '28086801', 'S-3', 'IV/c', 'Lektor Kepala', '196808281993031001_RUSMANSYAH.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(135, 'PNS', '196307101991031001', 'BAMBANG SUHARTO', 'Drs.', '-', 'M.Si.', 'L', '10076305', 'S-2', 'IV/b', 'Lektor Kepala', '196307101991031001_BAMBANG_SUHARTO.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(136, 'PNS', '196909261993032003', 'ATIEK WINARTI', 'Dr.', 'Dr.', 'M.Pd., M.Sc.', 'P', '26096902', 'S-3', 'IV/b', 'Lektor Kepala', '196909261993032003_ATIEK_WINARTI.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(137, 'PNS', '196010101985032008', 'LENY', 'Dra.', '-', 'M.Si.', 'P', '10106002', 'S-2', 'IV/b', 'Lektor Kepala', '', 'PENDIDIKAN KIMIA', '0', '0'),
+(138, 'PNS', '196902141994031003', 'ARIF SHOLAHUDDIN', 'Dr.', 'Dr.', 'S.Pd., M.Si.', 'L', '14026903', 'S-3', 'IV/b', 'Lektor Kepala', '196902141994031003_ARIF_SHOLAHUDDIN.jpg', 'PENDIDIKAN IPA', '0', '0'),
+(139, 'PNS', '196906161994031002', 'YUDHA IRHASYUARNA', '-', '-', 'S.Pd.,M.Pd.', 'L', '16066901', 'S-2', 'IV/a', 'Lektor Kepala', '196906161994031002_YUDHA_IRHASYUARNA.jpg', 'PENDIDIKAN IPA', '0', '0'),
+(140, 'PNS', '196305071991031002', 'IRIANI BAKTI', 'Drs.', '-', 'M.Si.', 'L', '7056305', 'S-2', 'IV/a', 'Lektor Kepala', '196305071991031002_IRIANI_BAKTI.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(141, 'PNS', '196410251991031003', 'MUHAMMAD KUSASI', 'Drs.', '-', 'M.Pd.', 'L', '25106402', 'S-2', 'IV/a', 'Lektor Kepala', '196410251991031003_MUHAMMAD_KUSASI.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(142, 'PNS', '196404281991031002', 'MAHDIAN', 'Drs.', '-', 'M.Si.', 'L', '29065907', 'S-2', 'IV/a', 'Lektor Kepala', '196404281991031002_MAHDIAN.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(143, 'PNS', '196801231993031002', 'SYAHMANI', 'Dr.', 'Dr.', 'M.Si.', 'L', '23016803', 'S-3', 'IV/a', 'Lektor Kepala', '196801231993031002_SYAHMANI.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(144, 'PNS', '196601151991112001', 'RILIA IRIANI', 'Dra.', '-', 'M.Si.', 'P', '15016604', 'S-2', 'IV/a', 'Lektor Kepala', '196601151991112001_RILIA_IRIANI.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(145, 'PNS', '196402101990031003', 'ABDUL HAMID', 'Drs.', '-', 'M.Si.', 'L', '10026419', 'S-2', 'IV/a', 'Lektor Kepala', '196402101990031003_ABDUL_HAMID.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(146, 'PNS', '196708251992121001', 'MAYA ISTYADJI', 'Drs.', '-', 'M.Pd.', 'L', '25086703', 'S-2', 'III/d', 'Lektor', '196708251992121001_MAYA_ISTYADJI.jpg', 'PENDIDIKAN IPA', '0', '0'),
+(147, 'PNS', '196210041989031002', 'PARHAM SAADI', 'Drs.', '-', 'M.Si.', 'L', '4106209', 'S-2', 'III/c', 'Lektor', '196210041989031002_PARHAM_SAADI.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(148, 'PNS', '199006072015041003', 'ALMUBARAK', '-', '-', 'S.Pd., M.Pd.', 'L', '0007069001', 'S-2', 'III/b', 'Dosen', '199006072015041003_ALMUBARAK.jpg', 'PENDIDIKAN KIMIA', '0', '0'),
+(149, 'PNS', '196608031991031014', 'IMAM YUWONO', 'Dr.', 'Dr.', 'M.Pd.', 'L', '3086610', 'S-3', 'III/d', 'Lektor Kepala', '196608031991031014_IMAM_YUWONO.jpg', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(150, 'PNS', '196905291999011001', 'UTOMO', '-', '-', 'S.Pd.,M.Pd.', 'L', '29056909', 'S-2', 'III/d', 'Lektor', '196905291999011001_UTOMO.jpg', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(151, 'PNS', '198508062010121006', 'AGUS PRATOMO ANDI WIDODO', '-', '-', 'S.Pd., M.Pd.', 'L', '6088501', 'S-2', 'III/c', 'Lektor', '198508062010121006_AGUS_PRATOMO_ANDI_WIDODO.jpg', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(152, 'PNS', '198810102015042002', 'MIRNAWATI', '-', '-', 'S.Pd., M.Pd.', 'P', '0010108805', 'S-2', 'III/b', 'Asisten Ahli', '', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(153, 'PNS', '198404222015042001', 'DEWI RATIH RAPISA', '-', '-', 'S.Pd., M.Pd.', 'P', '0022048404', 'S-2', 'III/b', 'Asisten Ahli', '', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(154, 'PNS', '196203071981031003', 'AMKA', 'Dr.', 'Dr.', 'M.Si', 'L', '0007036211', 'S-3', 'IV/b', 'Lektor', '196203071981031003_AMKA.jpg', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(155, 'PNS', '197001231990022001', 'SITI JALEHA', '-', '-', 'S.E.,M.Pd.', 'P', '', 'S-2', 'IV/a', 'Dosen', '', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(156, 'PNS', '199005282018032001', 'EVIANI DAMASTUTI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN LUAR BIASA', '0', '0'),
+(157, 'PNS', '196603311991021001', 'SUTARTO HADI', 'Prof. Dr.', 'Dr.', 'M.Si., M.Sc.', 'L', '31036601', 'S-3', 'IV/d', 'Profesor', '196603311991021001_SUTARTO_HADI.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(158, 'PNS', '195604271983032001', 'AGNI DANARYANTI', 'Dra.', '-', 'M.Pd.', 'P', '27045602', 'S-2', 'IV/b', 'Lektor Kepala', '195604271983032001_AGNI_DANARYANTI.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(159, 'PNS', '196603111992031005', 'KARIM', 'Dr.', 'Dr.', 'Dra.,M.Si.', 'L', '11036612', 'S-3', 'IV/b', 'Lektor Kepala', '196603111992031005_KARIM.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(160, 'PNS', '196808271993032001', 'NOOR FAJRIAH', 'Dr.', 'Dr.', 'M.Si.', 'P', '27086802', 'S-3', 'IV/b', 'Lektor Kepala', '', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(161, 'PNS', '196405011992031003', 'ISKANDAR ZULKARNAIN', 'Dr.', 'Dr.', 'M.Si.', 'L', '1056412', 'S-3', 'IV/a', 'Lektor Kepala', '196405011992031003_ISKANDAR_ZULKARNAIN.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(162, 'PNS', '195705141987031002', 'SUMARTONO', 'Drs.', '-', 'M.Pd.', 'L', '14055708', 'S-2', 'IV/a', 'Lektor Kepala', '195705141987031002_SUMARTONO.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(163, 'PNS', '196512221992031002', 'HIDAYAH ANSORI', 'Dr.', 'Dr.', 'M.Si.', 'L', '22126504', 'S-3', 'IV/a', 'Lektor Kepala', '196512221992031002_HIDAYAH_ANSORI.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(164, 'PNS', '196601281993032002', 'R. ATI SUKMAWATI', 'Dr.', 'Dr.', 'M.Kom.', 'P', '28016602', 'S-3', 'IV/a', 'Lektor Kepala', '196601281993032002_R__ATI_SUKMAWATI.jpg', 'PENDIDIKAN KOMPUTER', '0', '0'),
+(165, 'PNS', '196508081993031003', 'CHAIRIL FAIF PASANI', 'Dr.', 'Dr.', 'M.Si.', 'L', '8086503', 'S-3', 'IV/a', 'Lektor Kepala', '196508081993031003_CHAIRIL_FAIF_PASANI.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(166, 'PNS', '196008241990031001', 'MUHAIMIN', 'Drs.', 'Dr.', 'M.Si., Ph.D.', 'L', '24086001', 'S-3', 'III/c', 'Lektor', '', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(167, 'PNS', '196307051989031002', 'HARJA SANTANA PURBA', 'Dr.', 'Dr.', 'M.Kom.', 'L', '5076321', 'S-3', 'III/c', 'Lektor', '196307051989031002_HARJA_SANTANA_PURBA.jpg', 'PENDIDIKAN KOMPUTER', '0', '0'),
+(168, 'PNS', '197807162009122001', 'ELLI KUSUMAWATI', '-', '-', 'S.Pd., M.Pd.', 'P', '1116077801', 'S-2', 'III/b', 'Lektor', '197807162009122001_ELLI_KUSUMAWATI.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(169, 'PNS', '198709302012122002', 'SITI MAWADDAH', '-', '-', 'S.Pd., M.Pd.', 'P', '30098701', 'S-2', 'III/c', 'Lektor', '198709302012122002_SITI_MAWADDAH.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(170, 'PNS', '198810152014042001', 'KAMALIYAH', '-', '-', 'S.Pd., M.Pd.', 'P', '15108802', 'S-2', 'III/b', 'Asisten Ahli', '198810152014042001_KAMALIYAH.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(171, 'PNS', '198712232014042001', 'RIZKI AMALIA', '-', '-', 'S.Pd., M.Pd.', 'P', '23128701', 'S-2', 'III/b', 'Asisten Ahli', '198712232014042001_RIZKI_AMALIA.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(172, 'PNS', '198706042015042006', 'YUNI SURYANINGSIH', '-', '-', 'S.Pd., M.Pd.', 'P', '1104068702', 'S-2', 'III/b', 'Asisten Ahli', '198706042015042006_YUNI_SURYANINGSIH.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(173, 'PNS', '198901122015042001', 'ASDINI SARI', '-', '-', 'S.Pd., M.Pd.', 'P', '12018904', 'S-2', 'III/b', 'Asisten Ahli', '198901122015042001_ASDINI_SARI.jpg', 'PENDIDIKAN KOMPUTER', '0', '0'),
+(174, 'PNS', '199110022018031001', 'TAUFIQ HIDAYANTO', '-', '-', 'S.Pd.,M.Pd.', 'L', '0', 'S-2', 'III/b', 'Dosen', '199110022018031001_TAUFIQ_HIDAYANTO.jpg', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(175, 'PNS', '195509101981031005', 'WAHYU', 'Prof. Dr.', 'Dr.', 'M.S.', 'L', '10095506', 'S-3', 'IV/e', 'Profesor', '195509101981031005_WAHYU.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(176, 'PNS', '195912271986031003', 'SARBAINI', 'Dr.', 'Dr.', 'M.Pd.', 'L', '8046306', 'S-3', 'IV/c', 'Lektor Kepala', '195912271986031003_SARBAINI.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(177, 'PNS', '195909211985032001', 'FATIMAH', 'Dr.', 'Dr.', 'M.Hum.', 'P', '21095901', 'S-3', 'IV/c', 'Lektor Kepala', '195909211985032001_FATIMAH.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(178, 'PNS', '196601151991022001', 'RABIATUL ADAWIAH', 'Dr.', 'Dr.', 'M.Si.', 'P', '15016603', 'S-3', 'IV/c', 'Lektor Kepala', '196601151991022001_RABIATUL_ADAWIAH.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(179, 'PNS', '196208061991031002', 'ZAINUL AKHYAR', 'Dr.', 'Dr.', 'M.H.', 'L', '6086212', 'S-3', 'IV/b', 'Lektor Kepala', '196208061991031002_ZAINUL_AKHYAR.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(180, 'PNS', '197603272005012001', 'MARIATUL KIPTIAH', 'Dr.', 'Dr.', 'S.Pd., M.Pd.', 'P', '27037606', 'S-3', 'III/d', 'Lektor', '197603272005012001_MARIATUL_KIPTIAH.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(181, 'PNS', '195908011988031001', 'HARPANI', 'Dr.', 'Dr.', 'M.H.', 'L', '1085912', 'S-3', 'III/d', 'Lektor', '', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(182, 'PNS', '196005091988111001', 'HERU PUJI WINARSO', 'Drs.', '-', 'M.Si.', 'L', '9056010', 'S-2', 'III/c', 'Lektor', '196005091988111001_HERU_PUJI_WINARSO.jpg', 'PENDIDIKAN IPS', '0', '0'),
+(183, 'PNS', '197508172005011019', 'DIAN AGUS RUCHLIYADI', '-', '-', 'S.Pd., M.Pd.', 'L', '17087502', 'S-2', 'III/c', 'Lektor', '197508172005011019_DIAN_AGUS_RUCHLIYADI.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(184, 'PNS', '198304252008121003', 'MUHAMMAD ELMY', '-', '-', 'S.Pd., M.Pd.', 'L', '25048303', 'S-2', 'III/b', 'Asisten Ahli', '198304252008121003_MUHAMMAD_ELMY.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(185, 'PNS', '198208102008121004', 'SUROTO', '-', '-', 'S.Pd., M.Pd.', 'L', '10088206', 'S-2', 'III/b', 'Lektor', '198208102008121004_SUROTO.jpg', 'PENDIDIKAN PANCASILA & KEWARGANEGARAAN', '0', '0'),
+(186, 'PNS', '195709221986031002', 'MOHAMAD ZAENAL ARIFIN ANIS', 'Drs.', '-', 'M.Hum.', 'L', '22095703', 'S-3', 'IV/c', 'Lektor Kepala', '195709221986031002_MOHAMAD_ZAENAL_ARIFIN_ANIS.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(187, 'PNS', '195606071983031002', 'ERSIS WARMANSYAH', 'Prof. Dr.', 'Dr.', 'M.Pd.', 'L', '7065605', 'S-3', 'IV/c', 'Profesor', '195606071983031002_ERSIS_WARMANSYAH.jpg', 'PENDIDIKAN IPS', '0', '0'),
+(188, 'PNS', '196212121987032003', 'ROCHGIYANTI', 'Dra.', '-', 'M.Si., M.Pd.', 'P', '12126213', 'S-2', 'IV/b', 'Lektor Kepala', '196212121987032003_ROCHGIYANTI.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(189, 'PNS', '196508121990031005', 'YUSLIANI NOOR', 'Drs.', '-', 'M.Pd.', 'L', '12086507', 'S-2', 'IV/a', 'Lektor Kepala', '196508121990031005_YUSLIANI_NOOR.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(190, 'PNS', '195602091988111001', 'BAMBANG SUBIYAKTO', 'Dr. Drs.', 'Dr.', 'M.Hum.', 'L', '9025606', 'S-3', 'IV/a', 'Lektor Kepala', '195602091988111001_BAMBANG_SUBIYAKTO.jpg', 'PENDIDIKAN IPS', '0', '0'),
+(191, 'PNS', '196207271989031004', 'HERRY PORDA NUGROHO PUTRO', 'Dr.', 'Dr.', 'M.Pd.', 'L', '27076202', 'S-3', 'IV/a', 'Lektor Kepala', '196207271989031004_HERRY_PORDA_NUGROHO_PUTRO.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(192, 'PNS', '196607311991031002', 'RUSDI EFFENDI', 'Drs.', '-', 'M.Pd.', 'L', '31076602', 'S-2', 'IV/a', 'Lektor', '196607311991031002_RUSDI_EFFENDI.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(193, 'PNS', '195606111985031001', 'HAIRIYADI', 'Drs.', '-', 'M.Hum.', 'L', '11066610', 'S-2', 'III/d', 'Lektor', '', 'PENDIDIKAN SEJARAH', '0', '0'),
+(194, 'PNS', '197403012002121004', 'SYAHARUDDIN', 'Dr.', 'Dr.', 'S.Pd., M.A.', 'L', '1037404', 'S-3', 'III/d', 'Lektor', '197403012002121004_SYAHARUDDIN.jpg', 'PENDIDIKAN IPS', '0', '0'),
+(195, 'PNS', '197710182005011001', 'WISNU SUBROTO', '-', '-', 'S.S., M.A.', 'L', '18107708', 'S-2', 'III/d', 'Lektor', '197710182005011001_WISNU_SUBROTO.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(196, 'PNS', '198209022008121001', 'HERI SUSANTO', '-', '-', 'S.Pd., M.Pd.', 'L', '2098201', 'S-2', 'III/c', 'Lektor', '198209022008121001_HERI_SUSANTO.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(197, 'PNS', '198204092008121001', 'MANSYUR', '-', '-', 'S.Pd., M.Hum.', 'L', '9048203', 'S-2', 'III/a', 'Lektor', '198204092008121001_MANSYUR.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(198, 'PNS', '198901162015042002', 'MELISA PRAWITASARI', '-', '-', 'S.Pd., M.Pd.', 'P', '0016018902', 'S-2', 'III/b', 'Dosen', '198901162015042002_MELISA_PRAWITASARI.jpg', 'PENDIDIKAN SEJARAH', '0', '0'),
+(199, 'PNS', '198101172006042001', 'EDLIN YANUAR NUGRAHENI', '-', '-', 'S.Sn., M.Sn.', 'P', '17018003', 'S-2', 'III/d', 'Lektor', '198101172006042001_EDLIN_YANUAR_NUGRAHENI.jpg', 'PENDIDIKAN SENI, DRAMA, TARI DAN MUSIK', '0', '0'),
+(200, 'PNS', '197509132009121001', 'MARYANTO', '-', '-', 'S.Sn., M.Sn.', 'L', '13097508', 'S-2', 'III/b', 'Lektor', '197509132009121001_MARYANTO.jpg', 'PENDIDIKAN SENI, DRAMA, TARI DAN MUSIK', '0', '0'),
+(201, 'PNS', '197610212005012001', 'TUTUNG NURDIYANA', '-', '-', 'S.Sos., M.A., M.P.d', 'P', '21107607', 'S-3', 'III/d', 'Lektor', '197610212005012001_TUTUNG_NURDIYANA.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(202, 'PNS', '197408052006042002', 'ALFISYAH', '-', '-', 'M.Hum., M.Pd.', 'P', '5087407', 'S-2', 'IV/a', 'Lektor Kepala', '197408052006042002_ALFISYAH.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(203, 'PNS', '197605202005011004', 'YUSUF HIDAYAT', '-', '-', 'S.Sos., M.Si.', 'L', '20057607', 'S-3', 'III/c', 'Lektor', '197605202005011004_YUSUF_HIDAYAT.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(204, 'PNS', '198011292005011002', 'LUMBAN AROFAH', '-', '-', 'S.Sos., M.Sc.', 'L', '29118003', 'S-2', 'III/b', 'Asisten Ahli', '198011292005011002_LUMBAN_AROFAH.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(205, 'PNS', '197905262009121001', 'NASRULLAH', '-', '-', 'S.Sos.I., M.A.', 'L', '26057907', 'S-2', 'III/c', 'Lektor', '197905262009121001_NASRULLAH.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(206, 'PNS', '198003092009121002', 'SYAHLAN MATTIRO', '-', '-', 'S.H., M.Si.', 'L', '9038004', 'S-2', 'III/b', 'Asisten Ahli', '198003092009121002_SYAHLAN_MATTIRO.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(207, 'PNS', '197001262005012001', 'SIGIT RUSWINARSIH', '-', '-', 'S.Sos., M.Pd.', 'P', '26017005', 'S-2', 'III/b', 'Asisten Ahli', '197001262005012001_SIGIT_RUSWINARSIH.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(208, 'PNS', '198404162008122006', 'YULI APRIATI', '-', '-', 'S.Sos., M.A.', 'P', '16048401', 'S-2', 'III/b', 'Asisten Ahli', '198404162008122006_YULI_APRIATI.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(209, 'PNS', '198708142015042003', 'LAILA AZKIA', '-', '-', 'S.Sos., M.Si.', 'P', '0014088701', 'S-2', 'III/b', 'Asisten Ahli', '198708142015042003_LAILA_AZKIA.jpg', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(210, 'PNS', '199208082018032001', 'RESKI P', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(211, 'PNS', '195811111984031005', 'HAMSI MANSUR', 'Dr.', 'Dr.', 'M.M.Pd.', 'L', '11115817', 'S-3', 'IV/c', 'Lektor Kepala', '195811111984031005_HAMSI_MANSUR.jpg', 'TEKNOLOGI PENDIDIKAN', '0', '0'),
+(212, 'PNS', '198905202018032002', 'WIWIK ARIESTA', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'TEKNOLOGI PENDIDIKAN', '0', '0'),
+(213, 'PNS', '19690817 2002121 002', 'AGUS SALIM', 'Dr.', 'Dr.', 'M.M.Pd', 'L', '', 'S-3', 'III/d', 'Dosen', '', 'TEKNOLOGI PENDIDIKAN', '0', '0'),
+(214, 'CPNS', '19870715 201903 1 013', 'MASTUR', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'TEKNOLOGI PENDIDIKAN', '0', '0'),
+(215, 'CPNS', '19880307 201903 1 008', 'ARYADI RACHMAN', '-', '-', 'S.Pd.,M.Pd.', 'L', '0', 'S-2', 'III/b', 'Dosen', '198803072019031008_ARYADI_RACHMAN.jpg', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(216, 'CPNS', '19900416 201903 1 009', 'LAZUARDY AKBAR FAUZAN', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN JASMANI, KESEHATAN DAN REKREASI', '0', '0'),
+(217, 'CPNS', '19900608 201903 2 018', 'DEWI EKASARI KUSUMASTUTI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN KHUSUS', '0', '0'),
+(218, 'CPNS', '19940509 201903 1 009', 'ANANDA SETIAWAN', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN EKONOMI', '0', '0'),
+(219, 'CPNS', '19930817 201903 1 015', 'AKHMAD RIANDY AGUSTA', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN DASAR', '0', '0'),
+(220, 'CPNS', '19910425 201903 1 019', 'AKHMAD MUNAYA RAHMAN', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN GEOGRAFI', '0', '0'),
+(221, 'CPNS', '19920428 201903 2 029', 'FITRI MARDIANI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN SEJARAH', '0', '0'),
+(222, 'CPNS', '19900411 201903 2 017', 'SRIWATI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN SEJARAH', '0', '0'),
+(223, 'CPNS', '19910226 201903 1 011', 'BENNY MAHENDRA', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN SENI, DRAMA, TARI DAN MUSIK', '0', '0'),
+(224, 'CPNS', '19911114 201903 1 017', 'MUHAMMAD BUDI ZAKIA SANI', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN SENI, DRAMA, TARI DAN MUSIK', '0', '0'),
+(225, 'CPNS', '19951020 201903 2 014', 'JUMRIANI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN IPS', '0', '0'),
+(226, 'CPNS', '19920913 201903 1 016', 'MUHAMMAD REZKY NOOR HANDY', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN IPS', '0', '0'),
+(227, 'CPNS', '19911113 201903 1 012', 'RAHMAT NUR', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(228, 'CPNS', '19920310 201903 2 018', 'CUCU WIDATY', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN SOSIOLOGI & ANTROPOLOGI', '0', '0'),
+(229, 'CPNS', '19910317 201903 2 020', 'FAQIHATUDDINIYAH', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN ANAK USIA DINI', '0', '0'),
+(230, 'CPNS', '19870418 201903 2 012', 'INDAH BUDIARTI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(231, 'CPNS', '19901215 201903 1 017', 'SURYA HARYANDI', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN FISIKA', '0', '0'),
+(232, 'CPNS', '19930406 201903 2 014', 'SAUQINA', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN IPA', '0', '0'),
+(233, 'CPNS', '19880403 201903 2 014', 'RIZKI NUR ANALITA', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN KIMIA', '0', '0'),
+(234, 'CPNS', '19891005 201903 2 036', 'RIYA IRIANTI', '-', '-', 'S.Pd.,M.Pd.', 'P', '0', 'S-2', 'III/b', 'Dosen', '19891005_201903_2_036_RIYA_IRIANTI.jpg', 'PENDIDIKAN BIOLOGI', '0', '0'),
+(235, 'CPNS', '19890109 201903 1 007', 'REJA FAHLEVI', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN KEWARGANEGARAAN', '0', '0'),
+(236, 'CPNS', '19911212 201903 2 030', 'RAHMITA NOORBAITI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN MATEMATIKA', '0', '0'),
+(237, 'CPNS', '19890504 201903 1 017', 'AKHMAD SUGIANTO', '-', '-', 'S.Pd.,M.Pd.', 'L', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN BIMBINGAN KONSELING', '0', '0'),
+(238, 'CPNS', '19891213 201903 2 008', 'LITA LUTHFIYANTI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN BAHASA DAN SASTRA INDONESIA', '0', '0'),
+(239, 'CPNS', '19910130 201903 2 014', 'EKA PUTERI ELYANI', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(240, 'CPNS', '19910407 201903 2 025', 'ELSA ROSALINA', '-', '-', 'S.Pd.,M.Pd.', 'P', '', 'S-2', 'III/b', 'Dosen', '', 'PENDIDIKAN BAHASA INGGRIS', '0', '0'),
+(241, 'PNS', '19850331 201212 2 001', 'MUHSINAH ANNISA', '-', '-', 'S.Si.,,M.Pd.', 'P', '', 'S-2', 'III/c', 'Lektor', '', 'PENDIDIKAN GURU SEKOLAH DASAR', '0', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_saksi`
+--
+
+CREATE TABLE `tb_saksi` (
+  `saksi_id` int(11) NOT NULL,
+  `saksi_nama` varchar(128) NOT NULL,
+  `saksi_nip` varchar(128) NOT NULL,
+  `saksi_pangkat` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_saksi`
+--
+
+INSERT INTO `tb_saksi` (`saksi_id`, `saksi_nama`, `saksi_nip`, `saksi_pangkat`) VALUES
+(2, 'Pilkom Studio', '198708142015042003', 'IV/A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_suara`
+--
+
+CREATE TABLE `tb_suara` (
+  `suara_id` int(11) NOT NULL,
+  `pemilih_id` int(11) NOT NULL,
+  `tema_id` int(11) NOT NULL,
+  `calon_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_suara`
+--
+
+INSERT INTO `tb_suara` (`suara_id`, `pemilih_id`, `tema_id`, `calon_id`) VALUES
+(1, 2, 7, 1),
+(2, 2, 8, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_tema_pemilihan`
+--
+
+CREATE TABLE `tb_tema_pemilihan` (
+  `tema_id` int(11) NOT NULL,
+  `tema_nama` varchar(256) NOT NULL,
+  `tema_batas` int(128) NOT NULL,
+  `tema_logo` varchar(128) NOT NULL,
+  `tema_is_active` enum('0','1') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_tema_pemilihan`
+--
+
+INSERT INTO `tb_tema_pemilihan` (`tema_id`, `tema_nama`, `tema_batas`, `tema_logo`, `tema_is_active`) VALUES
+(7, 'Calon Senat ULM Unsur Guru Besar FKIP', 1571890440, 'Logo-Unlam-1.png', '1'),
+(8, 'Calon Senat ULM Unsur Dosen FKIP', 1571890560, 'Logo-Unlam-2.png', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user_role`
+--
+
+CREATE TABLE `tb_user_role` (
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_user_role`
+--
+
+INSERT INTO `tb_user_role` (`role_id`, `role_name`) VALUES
+(1, 'Administrator'),
+(2, 'Panitia'),
+(3, 'Manager');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tb_admin`
+--
+ALTER TABLE `tb_admin`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `tb_calon_ketua`
+--
+ALTER TABLE `tb_calon_ketua`
+  ADD PRIMARY KEY (`calon_ketua_id`);
+
+--
+-- Indexes for table `tb_pemilih`
+--
+ALTER TABLE `tb_pemilih`
+  ADD PRIMARY KEY (`pemilih_id`);
+
+--
+-- Indexes for table `tb_saksi`
+--
+ALTER TABLE `tb_saksi`
+  ADD PRIMARY KEY (`saksi_id`);
+
+--
+-- Indexes for table `tb_suara`
+--
+ALTER TABLE `tb_suara`
+  ADD PRIMARY KEY (`suara_id`);
+
+--
+-- Indexes for table `tb_tema_pemilihan`
+--
+ALTER TABLE `tb_tema_pemilihan`
+  ADD PRIMARY KEY (`tema_id`);
+
+--
+-- Indexes for table `tb_user_role`
+--
+ALTER TABLE `tb_user_role`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tb_admin`
+--
+ALTER TABLE `tb_admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_calon_ketua`
+--
+ALTER TABLE `tb_calon_ketua`
+  MODIFY `calon_ketua_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tb_pemilih`
+--
+ALTER TABLE `tb_pemilih`
+  MODIFY `pemilih_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+
+--
+-- AUTO_INCREMENT for table `tb_saksi`
+--
+ALTER TABLE `tb_saksi`
+  MODIFY `saksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_suara`
+--
+ALTER TABLE `tb_suara`
+  MODIFY `suara_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_tema_pemilihan`
+--
+ALTER TABLE `tb_tema_pemilihan`
+  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tb_user_role`
+--
+ALTER TABLE `tb_user_role`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
