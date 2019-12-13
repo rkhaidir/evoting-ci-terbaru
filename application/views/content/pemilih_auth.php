@@ -5,7 +5,12 @@
         <?php foreach($tema as $t) { ?>
         <div class="col-4">
             <div class="card o-hidden border-1 shadow-lg my-4">
-                <div class="card-body text-center">
+                <div class="card-body text-center 
+                    <?php 
+                        $nilai = $t['tema_id'];
+                        echo $nilai % 2 ? 'bg-dark text-white' : 'text-dark';
+                    ?>
+                ">
                     <h4 class="card-title">Surat Suara<br><?= $t['tema_nama'] ?></h4>
                     <hr>
                     <img src="<?= base_url('/assets/img/'.$t['tema_logo']) ?>" alt="" class="img-thumbnail" width="150">
